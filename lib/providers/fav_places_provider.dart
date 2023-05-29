@@ -1,3 +1,5 @@
+// import 'dart:io';
+
 import 'package:favorite_places/models/place.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -5,39 +7,35 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class FavoritePlacesNotifier extends StateNotifier<List<Place>> {
   FavoritePlacesNotifier() : super([]);
 
-  late Place place;
+  // late Place place;
 
-  String _title = ""; // form title field
-  final _formKey = GlobalKey<FormState>(); // form key
+  // File? _selectedImage;
+  // String _title = ""; // form title field
+  // final _formKey = GlobalKey<FormState>(); // form key
 
-  GlobalKey<FormState> get formKey => _formKey;
+  // GlobalKey<FormState> get formKey => _formKey;
 
-  String get title => _title; // form title getter
+  // String get title => _title; // form title getter
 
-  void setTitle(String title) {
-    // form title setter
-    _title = title;
-  }
+  // File? get selectedImage => _selectedImage; // getter for image
 
+  // void setImage(File? image) {
+  //   _selectedImage = image;
+  // }
+
+  // // form title setter
+  // void setTitle(String title) {
+  //   _title = title;
+  // }
+
+  // adding a new place
   void addPlace(Place place) {
-    // adding a new place
     state = [place, ...state];
   }
 
+  // removing a place
   void removePlace(Place place) {
-    // removing a place
     state = state.where((p) => p.id != place.id).toList();
-  }
-
-  void savePlace() {
-    // used in form to save a new place which calls add place inside
-    if (_formKey.currentState!.validate()) {
-      _formKey.currentState!.save();
-
-      place = Place(title: title);
-
-      addPlace(place); // call to addplace
-    }
   }
 }
 

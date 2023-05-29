@@ -1,17 +1,19 @@
 import 'dart:io';
-
+// import 'package:favorite_places/providers/fav_places_provider.dart';
+import 'package:favorite_places/providers/form_provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
-class ImageInput extends StatefulWidget {
+class ImageInput extends ConsumerStatefulWidget {
   const ImageInput({super.key});
 
   @override
-  State<ImageInput> createState() => _ImageInputState();
+  ConsumerState<ImageInput> createState() => _ImageInputState();
 }
 
-class _ImageInputState extends State<ImageInput> {
-  File? _selectedImage;
+class _ImageInputState extends ConsumerState<ImageInput> {
+  // File? _selectedImage;
 
   void _takePicture() async {
     final imagePicker = ImagePicker();
@@ -22,24 +24,26 @@ class _ImageInputState extends State<ImageInput> {
       return;
     }
 
-    setState(() {
-      _selectedImage = File(pickedImage.path);
-    });
+    var formReader = ref.read(formProvider);
+
+    formReader.setImage(File(pickedImage.path));
   }
 
   @override
   Widget build(BuildContext context) {
+    var formWatcher = ref.watch(formProvider);
+
     Widget content = TextButton.icon(
       icon: const Icon(Icons.camera),
       label: const Text('Take Picture'),
       onPressed: _takePicture,
     );
 
-    if (_selectedImage != null) {
+    if (formWatcher.selectedImage != null) {
       content = GestureDetector(
         onTap: _takePicture,
         child: Image.file(
-          _selectedImage!,
+          formWatcher.selectedImage!,
           width: double.infinity,
           height: double.infinity,
           fit: BoxFit.cover,

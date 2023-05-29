@@ -30,7 +30,12 @@ class PlacesScreen extends ConsumerWidget {
         title: const Text('Your Favorite Places'),
         centerTitle: false,
       ),
-      body: PlacesList(places: favoritePlaces),
+      body: Padding(
+        padding: const EdgeInsets.all(8),
+        child: PlacesList(
+          places: favoritePlaces,
+        ),
+      ),
     );
   }
 }
