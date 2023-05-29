@@ -49,12 +49,10 @@ class FormNotifier extends ChangeNotifier {
         return false;
       }
 
-      Place place = Place(
-          title: _title, image: _selectedImage!, location: _pickedLocation!);
+      ref
+          .read(favoritePlacesProvider.notifier)
+          .addPlace(_title, _selectedImage!, _pickedLocation!);
 
-      ref.read(favoritePlacesProvider.notifier).addPlace(place);
-
-      // addPlace(place); // call to addplace
       return true;
     }
     return false;
