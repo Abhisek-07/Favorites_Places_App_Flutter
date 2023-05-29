@@ -74,9 +74,9 @@ class FavoritePlacesNotifier extends StateNotifier<List<Place>> {
   }
 
   // removing a place
-  void removePlace(Place place) {
-    state = state.where((p) => p.id != place.id).toList();
-  }
+  // void removePlace(Place place) {
+  //   state = state.where((p) => p.id != place.id).toList();
+  // }
 }
 
 final favoritePlacesProvider =
